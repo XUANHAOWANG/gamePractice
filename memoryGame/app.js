@@ -119,7 +119,7 @@ if(value[0]==nextPos[0]&&value[1]==nextPos[1]){
 
 
     //下个点没有任何东洗  继续走
-   this.strategies.move.call(this);
+   this.strategies.move.call(this);//使用 call改变this指向 现在this指向 Snake.getNextPos
 
     
 };
