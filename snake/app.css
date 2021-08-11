@@ -61,7 +61,7 @@
 
 .snakeHead{
     background-size: cover;
-    background-image:url(../images/snake.png)
+    background-image:url(/snake/images/snakeHead.png)
     
 }
 .snakeBody{

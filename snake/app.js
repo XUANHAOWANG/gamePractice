@@ -127,8 +127,31 @@ if(value[0]==nextPos[0]&&value[1]==nextPos[1]){
 //碰撞后发生的事
 Snake.prototype.strategies={
 move:function(){
-    console.log('move')
-    console.log(this)
+    //创建一个新的身体（在旧蛇头的位置
+    var newBody=new Square(this.head.x/sw,this.head.y/sh,'snakeBody')
+    //跟新链表的关系
+    newBody.next=this.head.next//这个位置为body1
+    newBody.next.last=newBody;
+    newBody.last=null;
+
+    this.head.remove()//把旧蛇头删掉
+    newBody.create()
+
+    //创建一个新蛇头   蛇头下一个要走到的点
+    //同样使用构造函数 第一第二参数为坐标 第三个参数为css样式 className
+    var newHead=new Square(this.head.x/sw+this.direction.x, this.head.y/sh+this.direction.y,'snakeHead')
+    //更新链表关系
+    newHead.next=newBody;
+    newHead.last=null;
+    newBody.last=newHead;
+    //蛇身上的每一个坐标也需要更新
+    this.pos.splice(0,0,[this.head.x/sw+this.direction.x,this.head.y/sh+this.direction.y])//从第.位开始 替换0个
+    this.head=newHead;
+
+
+
+    newHead.create()
+
 },
 eat:function(){
     console.log('eat')
@@ -140,6 +163,7 @@ die:function(){
 snake=new Snake();
 snake.init();
 snake.getNextPos();
+
 
 
 }
